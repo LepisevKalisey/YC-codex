@@ -4,6 +4,8 @@ This project uses Next.js with TypeScript and MDX to render the translated YC le
 
 ## Setup
 
+This project requires **Node.js 18 or later**. If you use `nvm`, run `nvm install` to match the version defined in `.nvmrc`.
+
 Install dependencies and start the development server:
 
 ```bash
