@@ -1,4 +1,4 @@
-# Лекция 6: Рост
+# Лекция 6: Рост {#lecture-6}
 
 http://genius.com/Alex-schultz-lecture-6-growth-annotated
 
