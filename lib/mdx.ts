@@ -5,7 +5,11 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 export async function loadMdx(filePath: string): Promise<MDXRemoteSerializeResult> {
   const source = fs.readFileSync(filePath, 'utf8')
-  return serialize(source)
+  const processed = source.replace(/^(#{1,6})\s*([^#\n]*?)\s*{#([^}]+)}\s*$/gm, (_m, hashes, title, id) => {
+    const level = (hashes as string).length
+    return `<h${level} id="${id}">${(title as string).trim()}</h${level}>`
+  })
+  return serialize(processed)
 }
 
 export function getLectureSlugs(): string[] {
