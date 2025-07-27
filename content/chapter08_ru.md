@@ -1,4 +1,4 @@
-# Лекция 8: Делать то, что не масштабируется, PR и как начать {#lecture-8}
+# Лекция 8: Делать то, что не масштабируется, PR и как начать
 
 http://genius.com/Walker-williams-lecture-8-doing-things-that-dont-scale-pr-and-how-to-get-started-annotated
 
