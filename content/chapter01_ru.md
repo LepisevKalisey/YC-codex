@@ -1,4 +1,4 @@
-# Лекция 1: Как начать стартап
+# Лекция 1: Как начать стартап {#lecture-1}
 
 http://genius.com/Sam-altman-lecture-1-how-to-start-a-startup-annotated
 
