@@ -1,38 +1,44 @@
 import fs from 'fs'
 import path from 'path'
-import { serialize } from 'next-mdx-remote/serialize'
-import { MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { serialize }
+from 'next-mdx-remote/serialize'
+import matter from 'gray-matter'
 
-export async function loadMdx(filePath: string): Promise<MDXRemoteSerializeResult> {
-  const source = fs.readFileSync(filePath, 'utf8')
-  const processed = source.replace(/^(#{1,6})\s*([^#\n]*?)\s*{#([^}]+)}\s*$/gm, (_m, hashes, title, id) => {
-    const level = (hashes as string).length
-    return `<h${level} id="${id}">${(title as string).trim()}</h${level}>`
-  })
-  return serialize(processed)
-}
-
-export function getLectureSlugs(): string[] {
-  const dir = path.join(process.cwd(), 'content')
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.startsWith('chapter'))
-    .map((f) => f.replace(/\.md$/, ''))
-}
+const contentPath = path.join(process.cwd(), 'content')
 
 export interface LectureMeta {
   slug: string
   title: string
+  order: number
+}
+
+export function getLectureSlugs(): string[] {
+  return fs
+    .readdirSync(contentPath)
+    .filter((f) => f.startsWith('chapter'))
+    .map((f) => f.replace(/\.md$/, ''))
 }
 
 export function getLectures(): LectureMeta[] {
-  return getLectureSlugs().map((slug) => {
-    const file = fs.readFileSync(
-      path.join(process.cwd(), 'content', `${slug}.md`),
-      'utf8'
-    )
-    const match = file.match(/^#\s*([^\n{]+)[^\n]*{#.*}/)
-    const title = match ? match[1].trim() : slug
-    return { slug, title }
-  })
+  const slugs = getLectureSlugs()
+  const lectures = slugs
+    .map((slug) => {
+      const filePath = path.join(contentPath, `${slug}.md`)
+      const source = fs.readFileSync(filePath, 'utf8')
+      const { data } = matter(source)
+      return {
+        slug,
+        title: data.title,
+        order: data.order,
+      } as LectureMeta
+    })
+    .sort((a, b) => a.order - b.order)
+  return lectures
+}
+
+export async function loadMdx(filePath: string) {
+  const source = fs.readFileSync(path.join(process.cwd(), filePath), 'utf8')
+  const { content, data } = matter(source)
+  const mdxSource = await serialize(content, { scope: data })
+  return { source: mdxSource, meta: data }
 }

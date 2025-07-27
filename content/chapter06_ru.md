@@ -1,3 +1,8 @@
+---
+title: 'Лекция 6: Рост'
+order: 6
+slug: 'chapter06_ru'
+---
 # Лекция 6: Рост {#lecture-6}
 
 http://genius.com/Alex-schultz-lecture-6-growth-annotated

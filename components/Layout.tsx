@@ -1,28 +1,49 @@
 import Link from 'next/link'
 import { LectureMeta } from '../lib/mdx'
-import { ReactNode } from 'react'
 
-interface Props {
+interface LayoutProps {
+  children: React.ReactNode
   lectures: LectureMeta[]
-  children: ReactNode
 }
 
-export default function Layout({ lectures, children }: Props) {
+export default function Layout({ children, lectures }: LayoutProps) {
   return (
     <>
-      <header style={{ padding: '1rem', background: '#f0f0f0' }}>
-        <nav>
-          <Link href="/">Главная</Link>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {lectures.map((lec) => (
-              <li key={lec.slug}>
-                <Link href={`/lectures/${lec.slug}`}>{lec.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+      <header className="bg-light border-bottom">
+        <div className="container">
+          <nav className="navbar navbar-expand-lg navbar-light">
+            <Link href="/" legacyBehavior>
+              <a className="navbar-brand">YC Startup Library</a>
+            </Link>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                {lectures.map((lec) => (
+                  <li className="nav-item" key={lec.slug}>
+                    <Link href={`/lectures/${lec.slug}`} legacyBehavior>
+                      <a className="nav-link">Лекция {lec.order}</a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
+        </div>
       </header>
-      <main>{children}</main>
+      <main className="container py-4">{children}</main>
+      <footer className="text-center py-3 bg-light border-top">
+        <p className="mb-0">YC Codex</p>
+      </footer>
     </>
   )
 }

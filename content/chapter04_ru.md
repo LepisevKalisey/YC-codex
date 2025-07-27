@@ -1,4 +1,8 @@
-# Лекция 4: Создание продукта, общение с пользователями и рост {#lecture-4}
+---
+title: 'Лекция 4: Создание продукта, общение с пользователями и рост'
+order: 4
+---
+# Лекция 4: Создание продукта, общение с пользователями и рост
 
 http://genius.com/Adora-cheung-lecture-4-building-product-talking-to-users-and-growing-annotated
 
