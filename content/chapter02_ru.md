@@ -1,4 +1,4 @@
-# Лекция 2 - Команда и исполнение (Сэм Альтман)
+# Лекция 2 - Команда и исполнение (Сэм Альтман) {#lecture-2}
 
 http://genius.com/Sam-altman-lecture-2-ideas-products-teams-and-execution-part-ii-annotated
 

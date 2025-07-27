@@ -3,20 +3,23 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
 import fs from 'fs'
 import path from 'path'
+import Layout from '../components/Layout'
+import { getLectures, LectureMeta } from '../lib/mdx'
 
 interface Props {
   sections: MDXRemoteSerializeResult[]
+  lectures: LectureMeta[]
 }
 
-export default function Home({ sections }: Props) {
+export default function Home({ sections, lectures }: Props) {
   return (
-    <div>
+    <Layout lectures={lectures}>
       {sections.map((sec, i) => (
-        <section key={i} id={`section-${i}`}> 
+        <section key={i} id={`section-${i}`}>
           <MDXRemote {...sec} />
         </section>
       ))}
-    </div>
+    </Layout>
   )
 }
 
@@ -29,5 +32,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     const md = i === 0 ? parts[i] : '## ' + parts[i]
     sections.push(await serialize(md))
   }
-  return { props: { sections } }
+  const lectures = getLectures()
+  return { props: { sections, lectures } }
 }
