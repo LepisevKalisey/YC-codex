@@ -24,6 +24,8 @@ npm start
 
 Markdown files live in the `content/` folder. `letter.md` is the introduction and each lecture file (`chapterXX_ru.md`) begins with a heading that has an anchor like `{#lecture-1}`. These anchors are used for linking from the main article.
 
+During build a table of contents is generated on the main page. Each lecture is linked using its anchor so make sure the first line of every `chapterXX_ru.md` has this id.
+
 ## Deploying to Coolify
 
 1. Create a new Next.js application in Coolify and link it to this repository.

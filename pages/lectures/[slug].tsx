@@ -1,17 +1,21 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
-import { loadMdx, getLectureSlugs } from '../../lib/mdx'
+import { loadMdx, getLectureSlugs, getLectures, LectureMeta } from '../../lib/mdx'
+import Layout from '../../components/Layout'
 import path from 'path'
 
 interface Props {
   mdxSource: MDXRemoteSerializeResult
+  lectures: LectureMeta[]
 }
 
-export default function Lecture({ mdxSource }: Props) {
+export default function Lecture({ mdxSource, lectures }: Props) {
   return (
-    <article style={{ padding: '2rem' }}>
-      <MDXRemote {...mdxSource} />
-    </article>
+    <Layout lectures={lectures}>
+      <article style={{ padding: '2rem' }}>
+        <MDXRemote {...mdxSource} />
+      </article>
+    </Layout>
   )
 }
 
@@ -26,5 +30,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const slug = params?.slug as string
   const mdxSource = await loadMdx(path.join(process.cwd(), 'content', `${slug}.md`))
-  return { props: { mdxSource } }
+  const lectures = getLectures()
+  return { props: { mdxSource, lectures } }
 }

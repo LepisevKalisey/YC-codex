@@ -1,4 +1,4 @@
-# Лекция 7: Как создавать продукты, которые любят пользователи
+# Лекция 7: Как создавать продукты, которые любят пользователи {#lecture-7}
 
 http://genius.com/Kevin-hale-lecture-7-how-to-build-products-users-love-part-i-annotated
 

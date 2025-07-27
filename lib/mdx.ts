@@ -19,3 +19,20 @@ export function getLectureSlugs(): string[] {
     .filter((f) => f.startsWith('chapter'))
     .map((f) => f.replace(/\.md$/, ''))
 }
+
+export interface LectureMeta {
+  slug: string
+  title: string
+}
+
+export function getLectures(): LectureMeta[] {
+  return getLectureSlugs().map((slug) => {
+    const file = fs.readFileSync(
+      path.join(process.cwd(), 'content', `${slug}.md`),
+      'utf8'
+    )
+    const match = file.match(/^#\s*([^\n{]+)[^\n]*{#.*}/)
+    const title = match ? match[1].trim() : slug
+    return { slug, title }
+  })
+}
