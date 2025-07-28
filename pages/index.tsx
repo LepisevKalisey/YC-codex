@@ -10,7 +10,7 @@ import { getLectures, LectureMeta } from '../lib/mdx'
 interface Props {
   sections: {
     mdx: MDXRemoteSerializeResult
-    lecture?: LectureMeta
+    lecture: LectureMeta | null
   }[]
   lectures: LectureMeta[]
 }
@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   const sections = await Promise.all(
     parts.map(async (part, i) => {
-      const lecture = i > 0 ? lectures[i - 1] : undefined
+      const lecture = i > 0 ? lectures[i - 1] : null
       const mdx = await serialize(part)
       return { mdx, lecture }
     })
