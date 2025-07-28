@@ -1,4 +1,10 @@
-# Лекция 9: Как привлечь деньги {#lecture-9}
+---
+title: 'Лекция 9: Как привлечь деньги'
+order: 9
+slug: 'chapter09_ru'
+---
+
+# Лекция 9: Как привлечь деньги
 
 http://genius.com/Marc-andreessen-lecture-9-how-to-raise-money-annotated
 
