@@ -31,7 +31,15 @@ export default function Home({ sections, lectures }: Props) {
             <div className="card h-100">
               <div className="card-body">
                 <article className="prose">
-                  <MDXRemote {...sec.mdx} />
+                  <MDXRemote
+                    {...sec.mdx}
+                    components={{
+                      h1: (props) => <h1 className="card-title" {...props} />,
+                      h2: (props) => <h2 className="card-subtitle mb-2 text-muted" {...props} />,
+                      p: (props) => <p className="card-text" {...props} />,
+                      a: (props) => <a className="card-link" {...props} />,
+                    }}
+                  />
                 </article>
               </div>
               {sec.lecture && (
