@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   const sections = await Promise.all(
     parts.map(async (part, i) => {
-      const lecture = i > 0 ? lectures[i - 1] : null
+      const lecture = i > 0 ? lectures[i - 1] : undefined
       const mdx = await serialize(part)
       return { mdx, lecture }
     })
